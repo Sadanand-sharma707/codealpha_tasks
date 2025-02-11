@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="ageCalc.css">
+</head>
+<body>
+    <main class="main">
+        <img class="img"src="unnamed.jpg" alt="age Calculator">
+
+        <div class="container">
+         <section class="home">
+               <div class="home-content">
+                   <h1>Age Calculator</h1>
+                   <p>An Age Calculator is a tool or program that calculates a person's age based on their date of birth and the current date. It can be used to determine:Exact age in years, months, and days, Upcoming birthdays,Time elapsed since a specific date,Zodiac signs or other related information</p>
+                   <button class="start-btn">Start</button>
+              </div>
+         </section> 
+      </div>
+    </main>
+    
+ <div class="popup-info">
+              <h2>Age Calculator</h2>
+               
+      <span class="info"> <p class="title" style="color:rgb(233, 66, 233)">Date</p>
+             <input type="text"  name="date" id="date" placeholder="dd" required="required" minlength="1" maxlength="2"/>
+       </span><br>
+      <span class="info"><p class="title" style="color:rgb(114, 5, 114)">Month</p>
+             <input type="text" name="month" id="month" placeholder="mm" required="required" minlength="1" maxlength="2"/>
+        </span><br>
+      <span class="info"> <p class="title" style="color:rgb(114, 2, 114)">year</p>
+             <input type="text"  name="year" id="year" placeholder="yy" required="required" minlength="4" maxlength="4"/>
+      </span> 
+         
+      <div class="btn-group">
+            <button class="info-btn exit-btn">Exit</button>
+             <input type="button" name="submit" value="Submit"class="info-btn submit-btn"/>
+       </div>
+ 
+  </div>
+
+  <section class="quiz-section">
+       <div id="age">
+
+       </div>
+       <button class="ok">Ok</button>  
+ </section>
+
+
+    <script src="calculator.js"></script>
+</body>
+</html>  
