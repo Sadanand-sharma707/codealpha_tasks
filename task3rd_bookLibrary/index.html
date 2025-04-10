@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Library App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794') no-repeat center center/cover;
+      color: #fff;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    .search-bar, .add-book-form {
+      margin: 20px auto;
+      max-width: 600px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    input, select, button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      flex: 1 1 45%;
+      font-size: 1em;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+      flex: 1 1 100%;
+    }
+    .book-list {
+      margin-top: 30px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .book {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease-in-out;
+    }
+    .book:hover {
+      transform: scale(1.02);
+    }
+    .book h3 {
+      margin: 0 0 5px 0;
+    }
+    .book p {
+      margin: 0 0 8px 0;
+    }
+    .book small {
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📚 My Book Library</h1>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="🔍 Search books by title, author, or category...">
+  </div>
+
+  <form class="add-book-form" id="addBookForm">
+    <input type="text" id="title" placeholder="Book Title" required>
+    <input type="text" id="author" placeholder="Author" required>
+    <select id="category">
+      <option value="Fiction">Fiction</option>
+      <option value="Non-fiction">Non-fiction</option>
+      <option value="Sci-Fi">Sci-Fi</option>
+      <option value="Biography">Biography</option>
+      <option value="Mystery">Mystery</option>
+      <option value="Fantasy">Fantasy</option>
+    </select>
+    <button type="submit">➕ Add Book</button>
+  </form>
+
+  <div class="book-list" id="bookList"></div>
+
+  <script>
+    const books = [];
+
+    const addBookForm = document.getElementById('addBookForm');
+    const bookList = document.getElementById('bookList');
+    const searchInput = document.getElementById('search');
+
+    addBookForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const title = document.getElementById('title').value.trim();
+      const author = document.getElementById('author').value.trim();
+      const category = document.getElementById('category').value;
+      const addedOn = new Date().toLocaleDateString();
+
+      const newBook = { title, author, category, addedOn };
+      books.push(newBook);
+      displayBooks(books);
+      addBookForm.reset();
+    });
+
+    searchInput.addEventListener('input', function() {
+      const term = this.value.toLowerCase();
+      const filteredBooks = books.filter(book =>
+        book.title.toLowerCase().includes(term) ||
+        book.author.toLowerCase().includes(term) ||
+        book.category.toLowerCase().includes(term)
+      );
+      displayBooks(filteredBooks);
+    });
+
+    function displayBooks(bookArray) {
+      bookList.innerHTML = '';
+
+      if (bookArray.length === 0) {
+        bookList.innerHTML = '<p style="text-align:center">No books found.</p>';
+        return;
+      }
+
+      bookArray.forEach(book => {
+        const bookCard = document.createElement('div');
+        bookCard.classList.add('book');
+        bookCard.innerHTML = `
+          <h3>${book.title}</h3>
+          <p>by ${book.author}</p>
+          <small>Category: ${book.category}</small><br>
+          <small>📅 Added on: ${book.addedOn}</small>
+        `;
+        bookList.appendChild(bookCard);
+      });
+    }
+  </script>
+</body>
+</html>
